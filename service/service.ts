@@ -19,7 +19,7 @@ export const httpPost = async (data:any): Promise<any> => {
 };
 
 
-export const httpPut = async (id: number, data: string[]): Promise<any> => {
+export const httpPut = async (id: number, data: any): Promise<any> => {
   const req = await fetch(api + "/data/" + id, {
     method: "PUT",
     headers: {
@@ -28,7 +28,6 @@ export const httpPut = async (id: number, data: string[]): Promise<any> => {
     body: JSON.stringify(data)
   })
   const res = await req.json();
-  console.log(res)
   return res;
 };
 

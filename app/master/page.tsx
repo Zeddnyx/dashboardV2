@@ -10,5 +10,5 @@ export default function page() {
         <Table />
       </QueryClientProvider>
     </div>
-  );
+  )
 }

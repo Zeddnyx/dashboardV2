@@ -10,7 +10,13 @@
     @apply outline-none flex items-center justify-center p-2
   }
   input {
-    @apply outline-none p-2 rounded border;
+    @apply bg-transparent outline-none p-2 rounded border;
+  }
+  select {
+    @apply bg-transparent outline-none p-2  border rounded
+  }
+  option {
+    @apply bg-dark0
   }
   table {
     @apply table-auto border p-2
