@@ -1,18 +1,16 @@
 "use client";
-import React from "react";
 import Link from "next/link";
-import { store } from "../store/store";
-import { shallow } from "zustand/shallow";
-import SidebarCard from "../components/SidebarCard";
-import { sidebar } from "@/utils/sidebar";
+import { useSidebar } from "@/store/store";
+import SidebarCard from "@/components/Sidebar/SidebarCard";
+import { sidebar } from "./sidebar";
 
 export default function Sidebar() {
-  const [menu] = store((state: any) => {
-    return [state.menu];
-  }, shallow);
+  const [setSidebar] = useSidebar();
+
+  if (!setSidebar) return null;
 
   return (
-    <aside className={menu ? "aside-parent" : "hidden"}>
+    <nav className="aside-parent">
       <div className="nav-sidebar">
         <div className="grid gap-5">
           <div>
@@ -29,6 +27,6 @@ export default function Sidebar() {
           </Link>
         </div>
       </div>
-    </aside>
+    </nav>
   );
 }

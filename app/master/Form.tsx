@@ -1,34 +1,27 @@
 import Input from "@/components/Input";
-import { Dropdown } from "@/components/DropDown";
 
 interface FormProps<T> {
-  id: number;
+  id?: number;
   name: T;
   addres: T;
   gender: T;
   role: T;
   valueName: T;
-  options: {
-    value: T;
-  }[];
-  select: T;
-  setSelect: (selected: T) => void;
   valueAddres: T;
   valueGender: T;
+  valueRole: T;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onSelect: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
 export default function Form({
   name,
-  valueName,
   addres,
-  valueAddres,
   gender,
+  role,
+  valueName,
+  valueAddres,
   valueGender,
-  options,
-  select,
-  setSelect,
+  valueRole,
   onChange,
 }: FormProps<string>) {
   return (
@@ -46,7 +39,7 @@ export default function Form({
         value={valueGender}
         onChange={onChange}
       />
-      <Dropdown select={valueGender} setSelect={setSelect} options={options} />
+      <Input type="text" name={role} value={valueRole} onChange={onChange} />
     </>
   );
 }

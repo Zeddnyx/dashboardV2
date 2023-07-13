@@ -8,29 +8,19 @@ interface FormProps<T> {
   name: T;
   addres: T;
   gender: T;
-  role: {
-    value: "admin" | "member";
-  };
+  role: T;
 }
 
 export default function Table() {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<FormProps<string>[]>([]);
   const [id, setId] = useState<number>(0);
   const [value, setValue] = useState({
     id: 0,
     name: "",
     addres: "",
     gender: "",
-    role: [
-      {
-        value: "member",
-      },
-      {
-        value: "admin",
-      },
-    ],
+    role: "member",
   });
-  const [select, setSelect] = useState<string>(value.role[0].value);
 
   const queryClient = useQueryClient();
   const { mutate } = useMutation({
@@ -59,19 +49,22 @@ export default function Table() {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue({ ...value, [e.target.name]: e.target.value });
-    setSelect(e.target.value);
-    console.log(select);
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     mutate();
-    value.id !== id ? httpPut(value.id, value) : httpPost(value);
+    if (value.id !== id) {
+      httpPut(value.id, { ...value });
+      setValue({ ...value, id: 0 });
+    } else {
+      httpPost({ ...value });
+    }
   };
 
   return (
     <>
-      <div className="flex gap-3 items-start justify-around">
+      <div className="flex gap-3 items-start justify-between">
         <form onSubmit={handleSubmit}>
           <Form
             name="name"
@@ -80,16 +73,17 @@ export default function Table() {
             valueAddres={value.addres}
             gender="gender"
             valueGender={value.gender}
-            options={value.role}
-            select={select}
-            setSelect={setSelect}
+            role="role"
+            valueRole={value.role}
             onChange={handleChange}
           />
           <button
-            disabled={!value.name || !value.addres || !value.gender}
+            disabled={
+              !value.name || !value.addres || !value.gender || !value.role
+            }
             className="btn bg-dark0 w-full mt-2"
           >
-            {value.id !== id ? "Update" : "Add"}
+            {value.id !== id ? "Update" : "Submit"}
           </button>
         </form>
 
@@ -113,7 +107,7 @@ export default function Table() {
                   <td>{item.name}</td>
                   <td>{item.addres}</td>
                   <td>{item.gender}</td>
-                  <td>{item.role.value}</td>
+                  <td>{item.role}</td>
                   <td className="flex gap-2 items-center">
                     <button
                       className="edit-btn"

@@ -7,7 +7,7 @@
     @apply bg-secondary text-primary;
   }
   button {
-    @apply outline-none flex items-center justify-center p-2
+    @apply outline-none flex items-center justify-center
   }
   input {
     @apply bg-transparent outline-none p-2 rounded border;
@@ -48,13 +48,13 @@
 
 /* global style */
 .add-btn {
-  @apply bg-green text-dark0
+  @apply bg-green text-dark0 p-2
 }
 .rmv-btn {
-  @apply bg-red text-dark0
+  @apply bg-red text-dark0 p-2
 }
 .edit-btn {
-  @apply bg-yellow text-dark0
+  @apply bg-yellow text-dark0 p-2
 }
 .btn {
   @apply  p-2 px-8
@@ -62,10 +62,13 @@
 .modal {
   @apply absolute z-10 w-[30%] top-[30%] right-[35%] bg-green h-20 flex justify-center text-center
 }
+.active-nav {
+  @apply p-1 rounded bg-primary
+}
 
 /* navbar style */
 .nav-parent {
-  @apply flex items-center justify-between p-1 w-full h-16
+  @apply flex items-center justify-between p-1 w-full h-16 px-5
 }
 .aside-parent {
   @apply relative h-full w-[6.5rem]

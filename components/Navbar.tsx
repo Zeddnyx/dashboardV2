@@ -1,14 +1,11 @@
 "use client";
-import { store } from "../store/store";
-import { shallow } from "zustand/shallow";
+import { useSidebar } from "../store/store";
 
 export default function Navbar() {
-  const [menu, setMenu] = store((state: any) => {
-    return [state.menu, state.setMenu];
-  }, shallow);
+  const [_, setSidebar] = useSidebar();
 
   const toggleMenu = () => {
-    setMenu(!menu);
+    setSidebar((prev: boolean) => !prev);
   };
 
   return (

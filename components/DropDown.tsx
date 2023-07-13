@@ -1,36 +1,7 @@
-// type DropdownProps<T> = {
-//   name: T;
-//   options: {
-//     value: T;
-//   }[];
-//   value: T;
-//   onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-// };
-//
-// export default function Dropdown({
-//   name,
-//   options,
-//   value,
-//   onChange,
-// }: DropdownProps<string>) {
-//
-//
-//   return (
-//     <div>
-//       <label htmlFor={name}>{name}</label>
-//       <select name={name} value={value} onChange={onChange}>
-//         {options.map((option) => (
-//           <option key={option.value} value={option.value}>
-//             {option.value}
-//           </option>
-//         ))}
-//       </select>
-//     </div>
-//   );
-// }
 import React from "react";
 
 interface DropdownProps {
+  name: string;
   options: {
     value: string;
   }[];
@@ -39,6 +10,7 @@ interface DropdownProps {
 }
 
 export const Dropdown: React.FC<DropdownProps> = ({
+  name,
   options,
   select,
   setSelect,
@@ -49,6 +21,8 @@ export const Dropdown: React.FC<DropdownProps> = ({
   };
 
   return (
+  <div className="grid mt-1">
+    <label htmlFor={name} className="text-sm text-gray-500">{name}</label>
     <select value={select} onChange={handleOptionSelect}>
       {options.map((option) => (
         <option key={option.value} value={option.value}>
@@ -56,5 +30,6 @@ export const Dropdown: React.FC<DropdownProps> = ({
         </option>
       ))}
     </select>
+  </div>
   );
 };
